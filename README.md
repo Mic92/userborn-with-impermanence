@@ -7,5 +7,5 @@ $ nix run github:Mic92/userborn-with-impermanence#nixosConfigurations.myhost.con
 
 ## Current issues
 
-- [ ] `environment.persistence.<mountpoint>.users.<user>.directories` have the wrong user/group.
+- [x] ~~`environment.persistence.<mountpoint>.users.<user>.directories` have the wrong user/group.~~, see https://github.com/nix-community/impermanence/pull/223
 

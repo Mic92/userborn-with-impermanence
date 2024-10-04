@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, pkgs, ... }:
+{
   disko.devices.disk.main.device = "/dev/sda";
 
   services.getty.helpLine = ''
@@ -21,31 +22,23 @@
 
   services.getty.autologinUser = "root";
 
+  # Than bind mount will properly work
+  environment.etc."/etc/NetworkManager/system-connections".source = pkgs.runCommand "empty-dir" { } ''
+    mkdir $out
+  '';
+
   environment.persistence."/persistent" = {
     enable = true; # NB: Defaults to true, not needed
     hideMounts = true;
+    enableDebugging = true;
     directories = [
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
-      {
-        directory = "/var/lib/colord";
-        user = "colord";
-        group = "colord";
-        mode = "u=rwx,g=rx,o=";
-      }
     ];
-    files = [
-      "/etc/machine-id"
-      {
-        file = "/var/keys/secret_file";
-        parentDirectory = {
-          mode = "u=rwx,g=,o=";
-        };
-      }
-    ];
+    files = [ "/etc/machine-id" ];
     users.user = {
       directories = [
         "Downloads"

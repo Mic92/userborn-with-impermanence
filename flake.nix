@@ -3,7 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    impermanence.url = "github:nix-community/impermanence";
+    #impermanence.url = "github:nix-community/impermanence";
+    # See https://github.com/nix-community/impermanence/pull/223
+    impermanence.url = "github:Mic92/impermanence/userborn-support";
     disko.url = "github:nix-community/disko";
   };
 
