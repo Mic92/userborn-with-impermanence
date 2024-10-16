@@ -26,5 +26,14 @@
           disko.nixosModules.disko
         ];
       };
+
+      nixosConfigurations.zfs-debug = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration-2.nix
+          ./disko-config-2.nix
+          disko.nixosModules.disko
+        ];
+      };
     };
 }
